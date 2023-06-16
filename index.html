@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+        :root {
+            --background-color: #1f1f1f;
+            --secondary-bg-color: #2D2D2D;
+            --text-color: #f2f2f2;
+            --accent-color: #52b788;
+            --border-radius: 10px;
+            --box-shadow: 0px 0px 7px 1px #cbb3eae6;
+        }
+
+      body {
+        font-family: Arial;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 50px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        color: var(--text-color);
+        margin-bottom: 30px;
+      }
+
+      label {
+        font-size: 20px;
+        font-weight: bold;
+        color: var(--text-color);
+        margin-bottom: 10px;
+      }
+
+      textarea {
+        width: 300px;
+        height: 200px;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        resize: none;
+        margin-bottom: 20px;
+        background: var(--secondary-bg-color);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+      }
+
+      button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #3caea3;
+        }
+
+      .result {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 50px;
+        width: 300px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background-color: #fff;
+        font-size: 18px;
+        background: var(--secondary-bg-color);
+        color: white;
+      }
+
+      .result p {
+        margin: 0;
+        margin-bottom: 10px;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Occurance Counter</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Occurance Counter</h1>
+      <label for="text-input">Enter a list of nodes:</label>
+      <textarea id="text-input">
+mazda
+mazda
+mazda
+fusion
+fusion
+kia 
+kia
+kia
+</textarea>
+      <button id="count-button">Count Nodes</button>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      function countNodes() {
+        const input = document.getElementById("text-input").value;
+        const nodes = input.trim().split(/\s+/);
+        const count = {};
+
+        for (const node of nodes) {
+          if (node in count) {
+            count[node]++;
+          } else {
+            count[node] = 1;
+          }
+        }
+
+        let result = "";
+
+        if(input.length > 0){
+            for (const node in count) {
+            result += `${node}: ${count[node]}<br>`;
+            }
+        }
+        document.getElementById("result").innerHTML = result;
+      }
+
+      document.getElementById("count-button").addEventListener("click", countNodes);
+      
+      // run demo on load
+      countNodes();
+    </script>
+  </body>
+</html>
